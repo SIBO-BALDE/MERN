@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+ 
+
+
+
+/* Pour faire descendre le footer en bas */
+.site-container{
+  min-height: 100vh;
+}
+
+main{
+  flex: 1;
+
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color:  #A16509 !important;
+  border-color: #A16509 !important;
+}
+/* header{
+  background-color: rgb(82, 9, 9);
+  padding: 1rem;
+}
+header a{
+ color: white;
+ font-weight: bold;
+ text-decoration: none;
+} */
+/* Flex-wrap:wrap indique que les élements doivent etre coupé une fois arrivé à la limite de la premier ligne */
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.product{
+  border: 1px #404040 solid;
+  margin: 1rem;
+}
+.product img {
+  width: 100%;
+}
+.produc-info{
+  padding: 0.5rem;
+}
+
+.Navbar{
+  background-color: rgb(82, 9, 9);
+ 
+ 
+}
+.rating span{
+  color: #A16509;
+}
+.card-title{
+  color: #A16509;
+}
+.link-title{
+  color: #A16509;
+ 
+}
+.img-large {
+  max-width: 100%;
+}
+.backgroud-image{
+  background-image: url("../public/Images/background.jpg");
+}
