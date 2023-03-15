@@ -28,6 +28,9 @@ main{
   background-color:  #A16509 !important;
   border-color: #A16509 !important;
 }
+.d-grid :hover{
+  background-color: rgb(82, 9, 9) !important; 
+}
 /* header{
   background-color: rgb(82, 9, 9);
   padding: 1rem;
@@ -52,6 +55,7 @@ header a{
 }
 .produc-info{
   padding: 0.5rem;
+  
 }
 
 .Navbar{
@@ -64,14 +68,20 @@ header a{
 }
 .card-title{
   color: #A16509;
-}
-.link-title{
-  color: #A16509;
+  text-decoration: none !important ;
  
 }
+
+ 
+
 .img-large {
   max-width: 100%;
 }
 .backgroud-image{
   background-image: url("../public/Images/background.jpg");
 }
+/* Pour enlever le soulignement du name */
+.link{
+  text-decoration: none !important ;
+}
+

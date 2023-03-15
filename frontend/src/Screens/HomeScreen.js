@@ -6,6 +6,9 @@ import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Product from '../Components/Product';
+import LoadingBox from '../Components/LoadingBox';
+import MessageBox from '../Components/MessageBox';
+import { Helmet } from 'react-helmet-async';
 
 // On vas commenter le produit data pa;rceque c'est un statique data du frontend
 //import data from '../data';
@@ -31,7 +34,7 @@ import Product from '../Components/Product';
     case'FETCH_SUCCESS':
     return{...state, products:action.payload,loading:false};
     case'FETCH_FAIL':
-    return{...state, loadings:false,error:action.payload};
+    return{...state, loading:false,error:action.payload};
     default:
       return state;
     
@@ -81,9 +84,12 @@ import Product from '../Components/Product';
   return (
     <div>
       <section className="carossel_image">Carroussel Images</section>
-      <section className="list_poduct"> 
-            <h1>Featured products</h1>
-            <div className='backgroud-image'>
+      <section className="list_poduct">
+        <Helmet>
+         <title>La loincloth</title> 
+        </Helmet>
+          <h1>Featured products</h1>
+          <div className='backgroud-image'>
            {/* les proxy permet de se connecter sur adresss étranger à ton lieu d'habitat c'est à dire davoir une 
            adress au canada alors qu'on réside en Afrique 
            Le server proxy est un server intermediaire qui permeet à un utilisateur d'acceder à internet*/}
@@ -91,12 +97,12 @@ import Product from '../Components/Product';
                         {/* Ceci permet de copier le tableau déclarer dans data.js vers cet div */}
                         {/* CONDITION à faire */}
                      
-              { 
-              loading?  
-                <div>loading...</div>
-                :error?
-                <div> {error} </div>
-                :
+              { loading ? (
+                <LoadingBox />
+                ) : error ? (
+                <MessageBox variant="danger"> {error} </MessageBox>
+                ) : (
+                 
                 <Row>
              {/*data.*/products.map(product => (
               <Col  key={product.slug} sm={6} md={4} lg={3} className="mb-3">
@@ -104,7 +110,7 @@ import Product from '../Components/Product';
               </Col>
                ))
             }
-              </Row>   
+              </Row> ) 
          }
             </div>
             </div>

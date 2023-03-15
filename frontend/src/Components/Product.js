@@ -14,14 +14,14 @@ import Rating from './Rating';
                 <img src={product.Image}className="card-img-top" alt={product.Name}/>
                 </Link>
             <Card.Body> 
-                <Link  to={`/product/${product.slug}`}> 
+                <Link className='link' to={`/product/${product.slug}`}> 
                   {/* Ceci permet d'afficher le name du produit */} 
-                    <Card.Title> <p > {product.Name}</p></Card.Title> 
+                    <Card.Title className='titre'> <p > {product.Name}</p></Card.Title> 
                 </Link>
                 <Rating rating={product.rating} numReviews={product.numReviews} />
                   {/* Ceci permet d'afficher le prix du produit */}
                     <Card.Text> <p><strong>{product.prix} FCFA</strong></p></Card.Text>
-                    <Button className='btn-default'>Add to card</Button>
+                    <Button  className='btn-default'>Add to  card</Button>
             </Card.Body> 
         </Card>
     

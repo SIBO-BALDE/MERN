@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 import { useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,7 +7,13 @@ import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Rating from '../Components/Rating';
-import { Button } from 'bootstrap';
+import Button from 'react-bootstrap/Button';
+import { Helmet } from 'react-helmet-async';
+import LoadingBox from '../Components/LoadingBox';
+import MessageBox from '../Components/MessageBox';
+import { getError } from '../Utils';
+import { Store } from '../Store';
+
 
 const reducer = (state, action) =>{
   switch(action.type){
@@ -16,7 +22,7 @@ const reducer = (state, action) =>{
     case'FETCH_SUCCESS':
     return{...state, product:action.payload,loading:false};
     case'FETCH_FAIL':
-    return{...state, loadings:false,error:action.payload};
+    return{...state, loading:false,error:action.payload};
     default:
       return state;
     
@@ -34,7 +40,9 @@ const reducer = (state, action) =>{
       product: [],
       loading:true, 
       error:'',
+
     });
+    console.log({loading, error, product})
    // const [products, setProducts] = useState([]);
     useEffect(() => {
           //L’idée principale  de l’asynchrone est que le reste du script puisse continuer à s’exécuter pendant qu’une certaine opération plus longue ou demandant une réponse / valeur est en cours.
@@ -50,7 +58,8 @@ const reducer = (state, action) =>{
           const result = await axios.get(`/api/products/slug/${slug}`);
           dispatch({type: 'FETCH_SUCCESS', payload:result.data });
         }catch(err){
-          dispatch({type: 'FETCH_FAIL', payload:err.message});
+        
+          dispatch({type: 'FETCH_FAIL', payload:getError(err)});
   
         }
         
@@ -60,14 +69,22 @@ const reducer = (state, action) =>{
        fetchData();
     }, [slug]);
 
+ const {state, dispatch: ctxDispatch} = useContext(Store);
 
+console.log(state)
+const addToCartHandler =  () => {   
+  ctxDispatch ({
+    type:'CART_ADD_ITEM',
+    payload: {...product, quantity: 1},
+});
+}
 
   return (
-    loading? (
-    <div>Loading...</div>
-    ) :error? (
-    <div> {error} </div>
-    ):(
+    loading ? (
+   <LoadingBox />
+   ) : error ?( 
+      <MessageBox variant="danger"> {error} </MessageBox>
+      ):(
     <div>
       <Row>
          {/* // For  products images */}
@@ -81,6 +98,9 @@ const reducer = (state, action) =>{
         <Col md={3}>
           <ListGroup variant="flush">
           <ListGroup.Item>
+            <Helmet>{/*pour afficher le nom du produit sur le haut du site et hemelt est une pakage pour permetre le nom du produit de s'afficher dans le site meme*/}
+            <title > {product.Name} </title>
+            </Helmet>
             <h1> {product.Name} </h1>{/*pour afficher le nom du produit*/}
           </ListGroup.Item>
           <ListGroup.Item>
@@ -124,22 +144,19 @@ const reducer = (state, action) =>{
              {product.CountInStock> 0 && (
               <ListGroup.Item>
                 <div className='d-grid'>
-                  <Button variant="primary">
-                    Add to Cart
-                  </Button>
+                  <Button   onClick={addToCartHandler} variant="primary">Add to Cart</Button>
                 </div>
               </ListGroup.Item>
              )
-              
              }
-
            </ListGroup>
           </Card.Body>
         </Card>
         </Col> 
       </Row>
     </div>
+     )
     )
-  );
-}
+  
+};
 export default ProductScreen;
