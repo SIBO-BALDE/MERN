@@ -92,7 +92,7 @@ import { Helmet } from 'react-helmet-async';
           <div className='backgroud-image'>
            {/* les proxy permet de se connecter sur adresss étranger à ton lieu d'habitat c'est à dire davoir une 
            adress au canada alors qu'on réside en Afrique 
-           Le server proxy est un server intermediaire qui permeet à un utilisateur d'acceder à internet*/}
+           Le server proxy est un server intermediaire qui permet à un utilisateur d'acceder à internet*/}
               <div className="products">
                         {/* Ceci permet de copier le tableau déclarer dans data.js vers cet div */}
                         {/* CONDITION à faire */}

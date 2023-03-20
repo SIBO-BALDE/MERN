@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react'
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Rating from '../Components/Rating';
-import Button from 'react-bootstrap/Button';
+import Button  from 'react-bootstrap/Button'
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
@@ -33,6 +33,7 @@ const reducer = (state, action) =>{
 //on utilise le useParams pour sa
 
  function ProductScreen() {
+  const navigate =useNavigate()
     const params = useParams();
     const {slug} =params;
 
@@ -70,14 +71,25 @@ const reducer = (state, action) =>{
     }, [slug]);
 
  const {state, dispatch: ctxDispatch} = useContext(Store);
+ const {cart}=state;
 
-console.log(state)
-const addToCartHandler =  () => {   
+const addToCartHandler = async () => { 
+  // Ici on vérifiet si l'item exist dans le pagner si c'est le cas on augmente juste la quantité et l'item elle meme sinon on ajoute l'item
+  const existItem = cart.cartItems.find((x) => x._id ===product._id);
+  const quantity = existItem ? existItem.quantity + 1 : 1;
+  const {data} = await axios.get(`/api/products/${product._id}`);
+  // If la quantité in the stock is less thant added in the cart alert this message:'sorry. Product is out of stock'
+  if(data.CountInStock < quantity){
+    window.alert('sorry. Product is out of stock');
+    return;
+  }
   ctxDispatch ({
     type:'CART_ADD_ITEM',
-    payload: {...product, quantity: 1},
+    payload: {...product, quantity},
 });
-}
+// Its comming in usenavigate hooks in react routerdom
+navigate('/cart')
+};
 
   return (
     loading ? (

@@ -34,6 +34,23 @@ app.get('/api/products/slug/:slug', (req, res) => {
 
     
 });
+
+app.get('/api/products', (req, res) => {
+    res.send(data.products);
+});
+// Copie de l'api pour aficher les details de l'api si on clik sur le produit
+app.get('/api/products/:id', (req, res) => {
+    const product = data.products.find(x => x._id === req.params.id);
+    if(product) {
+        res.send(product);
+    }
+    else {
+        res.status(400).send({message: 'Product Not Found'})
+    }
+
+    
+});
+ 
  
       //Define the port we are t respond
 const port = process.env.PORT || 5000;
