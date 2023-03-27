@@ -17,7 +17,7 @@ import { Store } from '../Store';
       const existItem = cartItems.find((x) => x._id ===product._id);
       const quantity = existItem ? existItem.quantity + 1 : 1;
       const {data} = await axios.get(`/api/products/${item._id}`);
-      if(data.CountInStock < quantity){
+      if(data.countInStock < quantity){
           window.alert('sorry. Product is out of stock');
           return;
         }
@@ -45,7 +45,7 @@ import { Store } from '../Store';
                   {/* Ceci permet d'afficher le prix du produit */}
                     <Card.Text> <p><strong>{product.prix} FCFA</strong></p></Card.Text>
                     {/* La condition si le stock de produit est égale à 0 creer un button et mettew out of stock */}
-                    {product.CountInStock=== 0? <Button variant='danger'>Out of stock</Button>
+                    {product.countInStock=== 0? <Button variant='danger'>Out of stock</Button>
                     :
                     <Button  onClick={() => addToCartHandler(product)} className='btn-default'>Add to  card</Button>
                   }

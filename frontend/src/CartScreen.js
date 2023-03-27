@@ -4,7 +4,7 @@ import { Store } from './Store';
 import Row from 'react-bootstrap/Row'; 
 import Col from 'react-bootstrap/Col'; 
 import MessageBox from './Components/MessageBox';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
 import ListGroup from 'react-bootstrap/ListGroup';
 import  Button from 'react-bootstrap/Button'
@@ -23,7 +23,7 @@ import axios from 'axios';
     } = state;
     const updateCartHandler = async (item,quantity) => {
         const {data} = await axios.get(`/api/products/${item._id}`);
-        if(data.CountInStock < quantity){
+        if(data.countInStock < quantity){
             window.alert('sorry. Product is out of stock');
             return;
           }

@@ -1,13 +1,44 @@
           //Création d'un api
           //import express 
 import express  from "express";
+import mongoose from "mongoose";
 import data from "./data.js";
+//import dotenv
+import * as dotenv from 'dotenv'
+import seedRouter from "./Routes/seedRouter.js";
+import productRouter from "./Routes/productRoutes.js";
+import userRouter from "./Routes/userRoutes.js";
+//on peut importer comme sa :import dotenv from "dotenv";
 
+//to fetch variable in .env file
+dotenv.config()
+
+// On peut faire comme sa aussi:const url=process.env.MONGODB_URI
+//mongoose.connect(url,{})
+//.then(()=>console.log('db connect')
+//)
+//.catch((err)=>{
+  //  console.log(err.message) })
+
+  // then est la fonction mongoose retoune une promess et catch ratrappe l'erreur
+  mongoose.connect(process.env.MONGODB_URI).then(()=> {
+    console.log('connected to db')
+})
+.catch((err)=>{
+    console.log(err.message)
+});
 
         // Create express application ,express is a function just all it to returan object which is
        // the express app
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use('/api/seed',seedRouter);
+
+
+
+
 
       //This object has a methode named get and this methode has two parameter
      //the url that we are going to serve and the seconde parameter is the function that respond
@@ -19,38 +50,14 @@ const app = express();
 // app.get('/api/products', (req, res) => {
     // res.send(data.products);
 // });
-app.get('/api/products', (req, res) => {
-    res.send(data.products);
-});
-// Copie de l'api pour aficher les details de l'api si on clik sur le produit
-app.get('/api/products/slug/:slug', (req, res) => {
-    const product = data.products.find(x => x.slug === req.params.slug);
-    if(product) {
-        res.send(product);
-    }
-    else {
-        res.status(400).send({message: 'Product Not Found'})
-    }
+app.use('/api/products',productRouter);
+app.use('/api/users', userRouter);
 
-    
-});
 
-app.get('/api/products', (req, res) => {
-    res.send(data.products);
+//Condition pour verifier l'erreur du user routes
+app.use((err, req,res, next) => {
+    res.status(500).send({message:err.message});
 });
-// Copie de l'api pour aficher les details de l'api si on clik sur le produit
-app.get('/api/products/:id', (req, res) => {
-    const product = data.products.find(x => x._id === req.params.id);
-    if(product) {
-        res.send(product);
-    }
-    else {
-        res.status(400).send({message: 'Product Not Found'})
-    }
-
-    
-});
- 
  
       //Define the port we are t respond
 const port = process.env.PORT || 5000;

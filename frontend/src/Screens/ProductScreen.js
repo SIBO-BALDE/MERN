@@ -145,7 +145,7 @@ navigate('/cart')
                <Row>
                 <Col>Status:</Col>
                 <Col>
-                 {product.CountInStock > 0 ?(
+                 {product.countInStock > 0 ?(
                  <Badge bg="success">In Stock</Badge>
                  ) :(
                  <Badge bg="danger">Unavailable</Badge>
@@ -153,7 +153,7 @@ navigate('/cart')
                 </Col>
                </Row>
              </ListGroup.Item>
-             {product.CountInStock> 0 && (
+             {product.countInStock> 0 && (
               <ListGroup.Item>
                 <div className='d-grid'>
                   <Button   onClick={addToCartHandler} variant="primary">Add to Cart</Button>

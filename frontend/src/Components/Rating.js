@@ -1,5 +1,5 @@
 import React from 'react'
-import Product from './Product';
+
 
  function Rating(props) {
     const {rating,  numReviews}=props;
