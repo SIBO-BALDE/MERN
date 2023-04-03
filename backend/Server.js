@@ -8,6 +8,8 @@ import * as dotenv from 'dotenv'
 import seedRouter from "./Routes/seedRouter.js";
 import productRouter from "./Routes/productRoutes.js";
 import userRouter from "./Routes/userRoutes.js";
+import orderRouter from "./Routes/OrderRoutes .js";
+
 //on peut importer comme sa :import dotenv from "dotenv";
 
 //to fetch variable in .env file
@@ -34,12 +36,11 @@ dotenv.config()
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.get('/api/keys/paypal', (req, res)=> {
+    res.send(process.env.PAYPAL_CLIENT_ID || 'sb');  
+});
+
 app.use('/api/seed',seedRouter);
-
-
-
-
-
       //This object has a methode named get and this methode has two parameter
      //the url that we are going to serve and the seconde parameter is the function that respond
     //the api when user go to this address we need to return products to the frontend to the user this function
@@ -52,6 +53,9 @@ app.use('/api/seed',seedRouter);
 // });
 app.use('/api/products',productRouter);
 app.use('/api/users', userRouter);
+app.use('/api/orders', orderRouter);
+
+
 
 
 //Condition pour verifier l'erreur du user routes
