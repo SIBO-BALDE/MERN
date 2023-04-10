@@ -24,9 +24,20 @@ main{
   flex: 1;
 
 }
-.btn-primary,  .btn-primary:active, .btn-primary:visited {
+.btn-primary, .btn-outline-primary, .btn-primary:active, .btn-primary:visited {
   background-color:  #A16509 !important;
   border-color: #A16509 !important;
+}
+.fa-search{
+  color: #fff;
+}
+.fa-search:hover{
+  color: #520909;
+}
+.cart{
+  color:  #A16509 !important;
+  font-weight: bolder !important;
+  font-size: 2em !important;
 }
 .btn-primary:hover{
   background-color: rgb(82, 9, 9) !important; 
@@ -63,7 +74,7 @@ header a{
 }
 
 .Navbar{
-  background-color: rgb(82, 9, 9);
+  background-color: #520909;
  
  
 }
@@ -115,11 +126,11 @@ header a{
  height: 100%;
  position: absolute;
  left: -300px;
- background-color: #100901;
+ background-color: #520909;
  transition: 0.5s;
 
 }
-.side-container {
+.site-container {
  transition: 0.4s;
 
 }
@@ -129,5 +140,14 @@ header a{
 }
 .active-nav {
   left: 0;
+
+}
+.btn-btn{
+  background-color:  #520909!important;
+  border: 1px solid #520909;
+}
+.btn-btn:hover{
+  background-color: rgb(82, 9, 9) !important; 
+  border: 1px solid #fff;
 
 }

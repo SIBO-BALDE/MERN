@@ -26,6 +26,10 @@ import ProfileScreen from './Screens/ProfileScreen';
 import  Button  from 'react-bootstrap/Button';
 import { getError } from './Utils';
 import axios from 'axios';
+import SearchBox from './Components/SearchBox';
+
+
+// import data from '../../backend/data';
 
 
 
@@ -69,24 +73,26 @@ useEffect(()=> {
     :'d-flex flex-column site-container'
     } 
     >
-      <ToastContainer position='bottom-center' limit={1} />      <header>
-        {/* BOOTSTRAP HEADER */}
+      <ToastContainer position='bottom-center' limit={1} />     
+       <header>
+        
         <Navbar className='Navbar' bg="" variant="dark" expand="lg">
           <Container>
-            <Button variant="dark"
+            <Button  className='btn-btn' variant="dark"
             onClick={()=> setSidebarIsOpen(!sidebarIsOpen)}
             > 
-                   <i class="fas fa-bars"></i>
+                   <i className="fas fa-bars"></i>
             </Button>
             <LinkContainer to="/">
              <Navbar.Brand>loincloth</Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls='basic-navbar-nav'/>
             <Navbar.Collapse id="basic-navbar-nav">
+              <SearchBox/>
             <Nav className="me-auto w-100 justify-content-end">
               <Link AiOutlineShoppingCart to ="/cart" className='nav-link'>
                 Cart 
-                <AiOutlineShoppingCart/>
+                <AiOutlineShoppingCart className='cart'/>
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg ="danger">
                     {cart.cartItems.reduce((a,c) => a + c.quantity, 0)}
@@ -126,7 +132,7 @@ useEffect(()=> {
       <div
          className={
           sidebarIsOpen
-          ? 'acttive-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
+          ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
           : '  side-navbar d-flex justify-content-between flex-wrap flex-column'
          }
       >
@@ -137,7 +143,9 @@ useEffect(()=> {
            {categories.map((category)=> (
             <Nav.Item key={category}> 
             <LinkContainer 
-            to={`/search?category=${category}`}
+            // to={`/search?category=${category}`}
+            to={{pathName:`/search?category=${category}`}}
+            // to={{pathName:"/search",hash:"#hash",search: "?category=abcd"}}
               onClick={() => setSidebarIsOpen(false)}
 
             >
@@ -162,7 +170,8 @@ useEffect(()=> {
           <Route path="/shipping" element={<ShippingAdressScreen />}/>
           <Route path="/payment" element={<PaymentMethodScreen />}/>
           <Route path="/orderhistory" element={<OrderHistoryScreen />}/>
-          <Route path="/" element={<HomeScreen />}/> </Routes>
+          <Route path="/" element={<HomeScreen />}/> 
+        </Routes>
         </Container>
       </main>
       <footer>

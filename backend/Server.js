@@ -23,7 +23,9 @@ dotenv.config()
   //  console.log(err.message) })
 
   // then est la fonction mongoose retoune une promess et catch ratrappe l'erreur
-  mongoose.connect(process.env.MONGODB_URI).then(()=> {
+  mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(()=> {
     console.log('connected to db')
 })
 .catch((err)=>{
@@ -49,7 +51,7 @@ app.use('/api/seed',seedRouter);
 
  
 // app.get('/api/products', (req, res) => {
-    // res.send(data.products);
+//     res.send(data.products);
 // });
 app.use('/api/products',productRouter);
 app.use('/api/users', userRouter);

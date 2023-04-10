@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
 import ReactDOM from 'react-dom/client';
 import {HelmetProvider} from 'react-helmet-async';
 import './index.css';
@@ -6,6 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StoreProvider } from './Store';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+window.React1 = require('react');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
