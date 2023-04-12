@@ -151,3 +151,6 @@ header a{
   border: 1px solid #fff;
 
 }
+.text-bold{
+  font-weight: bold;
+}

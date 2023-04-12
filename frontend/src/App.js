@@ -27,6 +27,8 @@ import  Button  from 'react-bootstrap/Button';
 import { getError } from './Utils';
 import axios from 'axios';
 import SearchBox from './Components/SearchBox';
+import SearchScreen from './Screens/SearchScreen';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 
 // import data from '../../backend/data';
@@ -121,7 +123,23 @@ useEffect(()=> {
                 Sign In
                 </Link>
               )}
-
+              {/* Vérifion si l'utilisateur est l'admin ou pas */}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="ADmin" id="admin'nav-dropdown">
+                  <LinkContainer to="/dashboard">
+                    <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/productlist">
+                    <NavDropdown.Item>Products</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/orderlist">
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/userlist">
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
             </Nav>
             </Navbar.Collapse>
         </Container>
@@ -160,17 +178,33 @@ useEffect(()=> {
       <main>
       <Container className='mt-3'>
         <Routes>
-          <Route path="/product/:slug"element={<ProductScreen/> }/>
-          <Route path="/cart" element={<CartScreen />}/>
-          <Route path="/signin" element={<SigninScreen />}/>
-          <Route path="/signup" element={<SignupScreen />}/>
-          <Route path="/profile" element={<ProfileScreen />}/>
-          <Route path="/placeorder" element={<PlaceOderScreen />}/>
-          <Route path="/order/:id" element={<OrderScreen />}/>
-          <Route path="/shipping" element={<ShippingAdressScreen />}/>
-          <Route path="/payment" element={<PaymentMethodScreen />}/>
-          <Route path="/orderhistory" element={<OrderHistoryScreen />}/>
-          <Route path="/" element={<HomeScreen />}/> 
+          <Route path="/product/:slug"element={<ProductScreen/> }></Route>
+          <Route path="/cart" element={<CartScreen />}></Route>
+          <Route path="/search" element={<SearchScreen />}></Route>
+          <Route path="/signin" element={<SigninScreen />}></Route>
+          <Route path="/signup" element={<SignupScreen />}></Route>
+          <Route path="/profile" element={
+          <ProtectedRoute>
+             <ProfileScreen />
+          </ProtectedRoute>
+          }
+          ></Route>
+          <Route path="/placeorder" element={<PlaceOderScreen />}></Route>
+          <Route path="/order/:id" element={
+              <ProtectedRoute>
+                <OrderScreen />
+              </ProtectedRoute>
+         }
+         ></Route>
+          <Route path="/shipping" element={<ShippingAdressScreen />}></Route>
+          <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+          <Route path="/orderhistory" element={
+             <ProtectedRoute>
+               <OrderHistoryScreen />
+             </ProtectedRoute>
+          }
+          ></Route>
+          <Route path="/" element={<HomeScreen />}></Route> 
         </Routes>
         </Container>
       </main>
