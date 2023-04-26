@@ -13,7 +13,7 @@ console.log(window.React1 === window.React2);
 
 
 export default function SearchBox() {
-  const navigate = useNavigate
+  const navigate = useNavigate();
 
    
     const [query, setQuery]= useState('')
@@ -21,6 +21,7 @@ export default function SearchBox() {
     const submitHandler =(e) =>{
         e.preventDefault();
         navigate(query ? `/search/?query=${query}` : '/search')
+        
   
     };
     
@@ -28,7 +29,7 @@ export default function SearchBox() {
     <Form className='d-flex me-auto' onSubmit={submitHandler}>
         <InputGroup>
           <FormControl type="text"
-          Name="q"
+          name="q"
           id="q"
           onChange={(e) => setQuery(e.target.value)} placeholder="search products..."
           aria-label="Search Products"

@@ -29,6 +29,18 @@ import axios from 'axios';
 import SearchBox from './Components/SearchBox';
 import SearchScreen from './Screens/SearchScreen';
 import ProtectedRoute from './Components/ProtectedRoute';
+import DashboardScreen from './Screens/DashboardScreen';
+import AdminRoute from './Components/AdminRoute';
+import UserEditScreen from '../src/Screens/UserEditScreen';
+import ProductEditScreen from '../src/Screens/ProductEditScreen';
+import ProductListScreen from '../src/Screens/ProductListScreen';
+import UserListScreen from '../src/Screens/UserListScreen'
+import OrderListScreen from '../src/Screens/OrderListScreen'
+import ResetPasswordScreen  from '../src/Screens/ResetPasswordScreen';
+import ForgetPasswordScreen from '../src/ForgetPasswordScreen'
+import MapScreen  from '../src/Screens/MapScreen';
+
+
 
 
 // import data from '../../backend/data';
@@ -125,17 +137,17 @@ useEffect(()=> {
               )}
               {/* Vérifion si l'utilisateur est l'admin ou pas */}
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title="ADmin" id="admin'nav-dropdown">
-                  <LinkContainer to="/dashboard">
+                <NavDropdown title="Admin" id="admin'nav-dropdown">
+                  <LinkContainer to="/admin/dashboard">
                     <NavDropdown.Item>Dashboard</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/productlist">
+                  <LinkContainer to="/admin/products">
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/orderlist">
+                  <LinkContainer to="/admin/orders">
                     <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/userlist">
+                  <LinkContainer to="/admin/users">
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
@@ -178,33 +190,92 @@ useEffect(()=> {
       <main>
       <Container className='mt-3'>
         <Routes>
-          <Route path="/product/:slug"element={<ProductScreen/> }></Route>
-          <Route path="/cart" element={<CartScreen />}></Route>
-          <Route path="/search" element={<SearchScreen />}></Route>
-          <Route path="/signin" element={<SigninScreen />}></Route>
-          <Route path="/signup" element={<SignupScreen />}></Route>
+          <Route path="/product/:slug"element={<ProductScreen/> }/>
+          <Route path="/cart" element={<CartScreen />}/>
+          <Route path="/search" element={<SearchScreen />}/>
+          <Route path="/signin" element={<SigninScreen />}/>
+          <Route path="/signup" element={<SignupScreen />}/>
           <Route path="/profile" element={
           <ProtectedRoute>
              <ProfileScreen />
           </ProtectedRoute>
           }
-          ></Route>
-          <Route path="/placeorder" element={<PlaceOderScreen />}></Route>
+          />
+          <Route path="/placeorder" element={<PlaceOderScreen />}/>
           <Route path="/order/:id" element={
               <ProtectedRoute>
                 <OrderScreen />
               </ProtectedRoute>
          }
-         ></Route>
-          <Route path="/shipping" element={<ShippingAdressScreen />}></Route>
-          <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+         />
+          <Route path="/shipping" element={<ShippingAdressScreen />}/>
+          <Route path="/payment" element={<PaymentMethodScreen />}/>
+          <Route 
+          path="/admin/dashboard" 
+          element={
+          <AdminRoute>
+            <DashboardScreen/>
+            </AdminRoute>
+          }/>
+             
+          <Route
+                path="/admin/orders"
+                element={
+                  <AdminRoute>
+                    <OrderListScreen />
+                  </AdminRoute>
+                }
+              />
+
+            <Route
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              />
+             <Route
+                path="/admin/products"
+                element={
+                  
+                    <ProductListScreen />
+                
+                }
+              />
+             <Route
+                path="/admin/product/:id"
+                element={
+                  <AdminRoute>
+                    <ProductEditScreen />
+                  </AdminRoute>
+                }
+              />
+             <Route
+                path="/admin/user/:id"
+                element={
+                  <AdminRoute>
+                    <UserEditScreen />
+                  </AdminRoute>
+                }
+              />
+               <Route
+                path="/admin/map"
+                element={
+                  <ProtectedRoute>
+                    <MapScreen />
+                  </ProtectedRoute>
+                }
+              />
+              
+
           <Route path="/orderhistory" element={
              <ProtectedRoute>
                <OrderHistoryScreen />
              </ProtectedRoute>
           }
-          ></Route>
-          <Route path="/" element={<HomeScreen />}></Route> 
+          />
+          <Route path="/" element={<HomeScreen />}/>
         </Routes>
         </Container>
       </main>

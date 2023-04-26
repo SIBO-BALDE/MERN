@@ -24,6 +24,10 @@ const initialState = {
 };
 function reducer(state, action) {
     switch (action.type) {
+        case 'SET_FULLBOX_ON':
+      return { ...state, fullBox: true };
+    case 'SET_FULLBOX_OFF':
+      return { ...state, fullBox: false };
         // update action to rhe cart
         case 'CART_ADD_ITEM':
             //add to cart code for add item in the cart
@@ -74,6 +78,20 @@ function reducer(state, action) {
                     shippingAdress: action.payload,
                 },
             };
+
+
+            case 'SAVE_SHIPPING_ADDRESS_MAP_LOCATION':
+                return {
+                  ...state,
+                  cart: {
+                    ...state.cart,
+                    shippingAddress: {
+                      ...state.cart.shippingAddress,
+                      location: action.payload,
+                    },
+                  },
+                };
+
             case 'SAVE_PAYMENT_METHOD':
             return {
                 ...state,

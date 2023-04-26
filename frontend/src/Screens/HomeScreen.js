@@ -10,7 +10,7 @@ import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
 import { Helmet } from 'react-helmet-async';
 
-// On vas commenter le produit data pa;rceque c'est un statique data du frontend
+// On vas commenter le produit data parrceque c'est un statique data du frontend
 //import data from '../data';
 //We will fetch the data from the backend  to the frontend
 // For fetch data in the backend to the frontend we will use axios
