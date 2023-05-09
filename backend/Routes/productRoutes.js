@@ -159,7 +159,7 @@ productRouter.get(
         const queryFilter =
         searchQuery && searchQuery !== 'all'
         ? {
-            name:  {
+            Name:  {
                 $regex: searchQuery,
                 $options:'i'
             },
@@ -201,11 +201,13 @@ productRouter.get(
         : {_id:-1};
 
         const products=await Product.find({
+          
             ...queryFilter,
             ...categoryFilter,
             ...prixFilter,
             ...ratingFilter,  
         })
+        
         //La méthode sort() trie les éléments
         // d'un tableau, dans ce même tableau, et renvoie le tableau. Par défaut, le tri s'effectue sur les éléments du tableau convertis en chaînes de caractères et triées selon les valeurs des unités de code UTF-16 des caractères
         .sort(sortOrder)
@@ -218,6 +220,8 @@ productRouter.get(
             ...prixFilter,
             ...ratingFilter,
         });
+        console.log(countProducts, 'backend-countProducts')
+        
        
         res.send({
             products,

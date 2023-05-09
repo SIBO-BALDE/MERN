@@ -67,7 +67,7 @@ export default function OrderHistoryScreen() {
    
   return (
 
-    <div>
+    <div style={{marginTop:'100px'}}>
       <Helmet>
         <title>Order History</title>
       </Helmet>

@@ -154,7 +154,7 @@ export default function ProductEditScreen() {
     toast.success('Image removed successfully. click Update to apply it');
   };
   return (
-    <Container className="small-container">
+    <Container className="small-container" style={{marginTop:'100px'}}>
       <Helmet>
         <title>Edit Product ${productId}</title>
       </Helmet>

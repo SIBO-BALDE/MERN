@@ -90,7 +90,7 @@ export default function UserEditScreen() {
     }
   };
   return (
-    <Container className="small-container">
+    <Container className="small-container" style={{marginTop:'100px'}}>
       <Helmet>
         <title>Edit User ${userId}</title>
       </Helmet>

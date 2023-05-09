@@ -57,7 +57,7 @@ export default function SignupScreen() {
   },[navigate, redirect, userInfo] );
   return (
     // Formulaire de l'inscription du user'
-    <Container className="small-container">
+    <Container className="small-container" style={{marginTop:'100px'}}>
       <Helmet>
         <title>Sign Up</title>
       </Helmet>

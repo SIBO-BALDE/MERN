@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { Fragment, useEffect, useReducer } from 'react';
 //import { useState } from 'react';
 import axios from 'axios'
 import {  } from 'react-router-dom';
@@ -9,6 +9,8 @@ import Product from '../Components/Product';
 import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
 import { Helmet } from 'react-helmet-async';
+import Carroussel from '../Carroussel';
+import Container from 'react-bootstrap/esm/Container';
 
 // On vas commenter le produit data parrceque c'est un statique data du frontend
 //import data from '../data';
@@ -82,21 +84,21 @@ import { Helmet } from 'react-helmet-async';
      fetchData();
   }, []);
   return (
-    <div>
-
-
-
-
-      <section className="carossel_image">Carroussel Images</section>
-      <section className="list_poduct">
+   
+    <div className='products-screen'style={{msScrollSnapPointsX:'inherit'}}>
+      <Carroussel />
+      <Container className='mt-3' >
         <Helmet>
          <title>La loincloth</title> 
         </Helmet>
-          <h1>Featured products</h1>
+        
+       
+          <h1 className='titre'>Produits:</h1>
           <div className='backgroud-image'>
            {/* les proxy permet de se connecter sur adresss étranger à ton lieu d'habitat c'est à dire davoir une 
            adress au canada alors qu'on réside en Afrique 
            Le server proxy est un server intermediaire qui permet à un utilisateur d'acceder à internet*/}
+         
               <div className="products">
                         {/* Ceci permet de copier le tableau déclarer dans data.js vers cet div */}
                         {/* CONDITION à faire */}
@@ -116,10 +118,13 @@ import { Helmet } from 'react-helmet-async';
             }
               </Row> ) 
          }
+       
             </div>
+          
             </div>
-        </section>
+            </Container>
     </div>
+      
   )
 };
 export default HomeScreen;

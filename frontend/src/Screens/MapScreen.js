@@ -33,11 +33,11 @@ export default function MapScreen() {
       navigator.geolocation.getCurrentPosition((position) => {
         setCenter({
           lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          log: position.coords.longitude,
         });
         setLocation({
           lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          log: position.coords.longitude,
         });
       });
     }
@@ -86,7 +86,7 @@ export default function MapScreen() {
       type: 'SAVE_SHIPPING_ADDRESS_MAP_LOCATION',
       payload: {
         lat: location.lat,
-        lng: location.lng,
+        log: location.log,
         address: places[0].formatted_address,
         name: places[0].name,
         vicinity: places[0].vicinity,
@@ -97,7 +97,7 @@ export default function MapScreen() {
     navigate('/shipping');
   };
   return (
-    <div className="full-box">
+    <div className="full-box" style={{marginTop:'100px'}}>
       <LoadScript libraries={libs} googleMapsApiKey={googleApiKey}>
         <GoogleMap
           id="smaple-map"

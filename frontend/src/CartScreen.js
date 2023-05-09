@@ -54,7 +54,7 @@ const checkoutHandler= () => {
 
 
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>

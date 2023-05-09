@@ -193,16 +193,16 @@ export default function SearchScreen() {
         };
         
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <Helmet>
         <title>Search Products</title>
       </Helmet>
-      <Row>
-        <Col md={3}>
-            <h3>Department</h3>
-            <div>
-                <ul>
-                    <li>
+      <Row >
+        <Col md={3} >
+            <h3 className='first'>Department</h3>
+            <div  >
+                <ul >
+                    <li >
                         <Link 
                         className={'all' === category ? 'text-bold' : ''}
                         to={getFilterUrl({category: 'all'})}
@@ -224,7 +224,7 @@ export default function SearchScreen() {
             </div>
 
             <div>
-                <h3>Price</h3>
+                <h3  className='seconde' >Price</h3>
                 <ul>
                     <li>
                         <Link
@@ -254,7 +254,7 @@ export default function SearchScreen() {
                 </ul>
             </div>
             <div>
-                <h3>Average Customer Review</h3>
+                <h3 className='third' >Average Customer Review</h3>
                 <ul>
                 {ratings.map((r)=> (
                         <li key={r.name}>
@@ -327,7 +327,7 @@ export default function SearchScreen() {
                 
                 {products.map((product) => ( 
                     <Col sm={6} lg={4} className='mb-3' key={product._id}>
-                       
+                      
                         <Product product={product}></Product>
                         
                     </Col>   
